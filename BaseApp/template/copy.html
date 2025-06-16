@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4" id="auth-container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Task Management System</h3>
+                        <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">Login</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab">Register</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="authTabsContent">
+                            <div class="tab-pane fade show active" id="login" role="tabpanel">
+                                <form id="login-form" class="mt-3">
+                                    <div class="mb-3">
+                                        <label for="login-email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="login-email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="login-password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="login-password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="register" role="tabpanel">
+                                <form id="register-form" class="mt-3">
+                                    <div class="mb-3">
+                                        <label for="register-name" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="register-name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="register-email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="register-email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="register-password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="register-password" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="register-confirm" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="register-confirm" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success w-100">Register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4" id="app-container" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Task Management System</h2>
+            <button id="logout-btn" class="btn btn-outline-danger">Logout</button>
+        </div>
+
+        <div class="mb-4">
+            <h4 class="section-title">Team Management</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Create Team</h5>
+                            <form id="team-form" class="mb-3">
+                                <div class="mb-3">
+                                    <label for="team-name" class="form-label">Team Name</label>
+                                    <input type="text" class="form-control" id="team-name" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Create Team</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Invite Member</h5>
+                            <form id="invite-form">
+                                <div class="mb-3">
+                                    <label for="invite-email" class="form-label">Member Email</label>
+                                    <input type="email" class="form-control" id="invite-email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="invite-team" class="form-label">Select Team</label>
+                                    <select class="form-select" id="invite-team" required>
+                                        <option value="">Select a Team</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Invite</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Your Teams</h5>
+                    <ul id="team-list" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h4 class="section-title">Task Management</h4>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Create New Task</h5>
+                    <form id="task-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="task-title" class="form-label">Task Title</label>
+                                    <input type="text" class="form-control" id="task-title" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="task-desc" class="form-label">Description</label>
+                                    <textarea class="form-control" id="task-desc" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="task-priority" class="form-label">Priority</label>
+                                    <select class="form-select" id="task-priority">
+                                        <option value="high">High</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="low">Low</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="task-assignee" class="form-label">Assign to</label>
+                                    <select class="form-select" id="task-assignee">
+                                        <option value="">Select a member</option>
+                                        <option value="member1">Member 1</option>
+                                        <option value="member2">Member 2</option>
+                                        <option value="member3">Member 3</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="task-team" class="form-label">Assign to Team</label>
+                                    <select class="form-select" id="task-team" required>
+                                        <option value="">Select a team</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Task</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task Board</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="kanban-column">
+                                <h4>To Do</h4>
+                                <ul class="list-group" id="todo-list"></ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="kanban-column">
+                                <h4>In Progress</h4>
+                                <ul class="list-group" id="inprogress-list"></ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="kanban-column">
+                                <h4>Done</h4>
+                                <ul class="list-group" id="done-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="taskModalTitle">Task Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6>Description</h6>
+                            <p id="task-modal-desc"></p>
+                            
+                            <h6 class="mt-4">Comments</h6>
+                            <div id="task-comments" class="mb-3">
+                                <div class="card mb-2">
+                                    <div class="card-body p-2">
+                                        <div class="d-flex justify-content-between">
+                                            <strong>John Doe</strong>
+                                            <small class="text-muted">2 hours ago</small>
+                                        </div>
+                                        <p class="mb-0">This task is almost done, just need to test it.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <form id="comment-form">
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="comment-text" rows="2" placeholder="Add a comment..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Add Comment</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Details</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Status:</span>
+                                    <span id="task-modal-status" class="badge bg-primary"></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Priority:</span>
+                                    <span id="task-modal-priority" class="badge bg-warning"></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Assigned To:</span>
+                                    <span id="task-modal-assignee" class="badge bg-secondary"></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Team:</span>
+                                    <span id="task-modal-team" class="badge bg-info"></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Created:</span>
+                                    <span id="task-modal-created" class="text-muted">Today</span>
+                                </li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Attachments</h6>
+                            <div id="task-attachments" class="mb-3">
+                                <div class="card mb-2">
+                                    <div class="card-body p-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>document.pdf</span>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form id="attachment-form">
+                                <div class="mb-3">
+                                    <input type="file" class="form-control" id="attachment-file">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Add Attachment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

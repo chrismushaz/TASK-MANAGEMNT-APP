@@ -1,0 +1,97 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.list-group-item {
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    cursor: grab;
+}
+
+.list-group-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.kanban-column {
+    min-height: 500px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.badge {
+    margin-right: 5px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.priority-high {
+    border-left: 4px solid #dc3545;
+}
+
+.priority-medium {
+    border-left: 4px solid #ffc107;
+}
+
+.priority-low {
+    border-left: 4px solid #28a745;
+}
+
+h2 {
+    color: #0d6efd;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#auth-container {
+    max-width: 500px;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.task-meta {
+    margin-top: 8px;
+}
+
+.task-content p {
+    margin-bottom: 0;
+}
+
+.dragging {
+    opacity: 0.5;
+    background-color: #f8f9fa;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+}
+
+.modal-body h6 {
+    color: #0d6efd;
+    margin-top: 1rem;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
