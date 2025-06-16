@@ -1,0 +1,50 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.swp
+
+# Virtual Environments
+env/
+venv/
+ENV/
+.myenv/
+.myvenv/
+*.env
+*.venv
+
+# Django static files
+staticfiles/
+media/
+
+# Django migrations
+**/migrations/
+!*/migrations/__init__.py
+
+# Database
+*.sqlite3
+*.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+
