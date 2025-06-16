@@ -11,18 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import dj_database_url  # Library to parse the DATABASE_URL environment variable into Django DATABASES format
-import os  # To access environment variables
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')  # Get the DATABASE_URL from environment variables; used for database connection config
-    )
-}
 
 
 
@@ -83,6 +77,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BaseApp.wsgi.application'
 
 
+
+
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -92,6 +89,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+else:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
 
 # Password validation
